@@ -1,0 +1,46 @@
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">K2M ERP</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       {% if request.user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+             <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="ServicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Servis</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'services:service-list' %}">Arızalı Ürün Listesi</a>
+                  <a class="dropdown-item" href="{% url 'services:service-create' %}">Ürün Ekle</a>
+                  <a class="dropdown-item" href="{% url 'services:service-list' %}">Firma Ekle</a>
+                  <a class="dropdown-item" href="{% url 'services:service-list' %}">Servis Ekle</a>
+               </div>
+            </li>
+            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="TeknikDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teknik Servis</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'home:index' %}">Arızalı Ürün Listesi</a>
+                  <a class="dropdown-item" href="{% url 'home:marka' %}">Ürün Ekle</a>
+                  <a class="dropdown-item" href="{% url 'home:firma' %}">Firma Ekle</a>
+                  <a class="dropdown-item" href="{% url 'home:servis' %}">Servis Ekle</a>
+               </div>
+            </li>
+            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SATIS</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'license:index' %}">Lisans Listesi</a>
+                  <a class="dropdown-item" href="{% url 'license:partner_list' %}">Partner Listesi</a>
+                  <a class="dropdown-item" href="{% url 'license:proje_list' %}">Register Listesi</a>
+               </div>
+            </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            {% if request.user.is_authenticated %}
+            <lebel class="text-k2m text-uppercase">{{request.user.get_full_name}}</lebel>
+            {% endif %}
+        </div>
+         <lu class="navbar-nav">
+              <li class="nav-item active"> <a class="nav-link" href="{% url 'accounts:logout' %}">Çıkış <span class="sr-only">(current)</span></a> </li>
+         </lu>
+        {% endif %}
+      </div>
+   </div>
+</nav>

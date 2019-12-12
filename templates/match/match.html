@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load  crispy_forms_tags %}
+
+{% block body %}
+     <div id="id_container" class="container-flued">
+      <div class="row">
+          <div class="col-md-9 mx-auto">
+                <div class="pb-2 my-4 border-bottom">
+                  <h2 class="mx-5" >Maç Tablosu</h2>
+                </div>
+              <Form method="POST" class="uniForm" enctype="multipart/form-data">
+                  {% csrf_token %}                  
+                  {% crispy form %}                  
+                  
+                  <input id="btn1" type="button" onclick="location.href='{% url 'match:score' %}'" class="iter btn btn-outline-primary mt-5 mx-3 " value="Maç Sonuçları">                        
+                  <input id="btn2" type="button" data-toggle="modal" data-target="#myModal" class="iter btn btn-outline-primary mt-5 mx-3" value="Maça Dön">                        
+                  <input id="btn-playerName" type="button" data-toggle="modal" data-target="#playerName-modal" class="iter btn btn-outline-primary mt-5 mx-3" value="OYUNCU ISMI">                        
+                  <input id="btn-match-finis" type="button" class="iter btn btn-outline-primary mt-5 mx-3" value="MAÇI BİTİR">                        
+              </form>
+              
+              
+          </div>
+      </div>
+    </div>
+
+  
+
+    {% include 'match/run.html' %}
+    {% include 'match/player-name-modal.html' %}
+  
+{% include 'controller.html' %}
+  {% endblock %}
+  {% block footer %}
+         
+  {% endblock %}  
+   
+    

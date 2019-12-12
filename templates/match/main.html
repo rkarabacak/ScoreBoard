@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block body %}
+    <div class="container-flued d-flex h-100">{% csrf_token %}
+      <div class="row justify-content-start">
+        <div class="col-10">  
+        
+        <table  class="table table-primary table-bordered"  id="Match-Table">
+            <thead>
+                <th>Match ID</th>
+                <th>status</th>
+                <th>palyer1_name</th>
+                <th>player2_name</th>
+                <th>player1_id</th>
+                <th>player2_id</th>
+                <th>runs</th>
+                <th>seconds</th>
+                <th>active_run</th>
+                <th>allow_draw</th>
+                <th>last_shoot</th>
+                <th>score_limit</th>
+                <th>inning_limit</th>
+                <th>timeout_limit</th>
+                <th>player1_timeout</th>
+                <th>player2_timeout</th>
+                <th>player1_timeavg</th>
+                <th>player2_timeavg</th>
+                <th>positions_switched</th>
+                <th>color_switched</th>
+                <th>time_force</th>
+                <th>tour_name</th>
+                <th>group_name</th>
+            </thead>
+        <tbody>
+        </tbody>
+        </table>
+
+        <div  id="matchform">
+            <button  id="createMatch"  class="btn"> Create Match </button>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% block extrajs %}
+<script src="{% static 'js/app2.js' %} "></script> 
+{% endblock extrajs %}

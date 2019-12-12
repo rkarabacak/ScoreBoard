@@ -4,9 +4,10 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}K2M ERP{% endblock %}</title>
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+    <title>{% block title %}Score Board{% endblock %}</title>
+
     <link rel="stylesheet" href="{% static 'css/jquery.dataTables.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Tomorrow:400,500,600,700&display=swap" rel="stylesheet">
 
     <!-- Fontawesome CSS-->
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
@@ -16,44 +17,33 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 
-
-
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
 
 </head>
 <body>
 
-    {% include "header.html" %}
+    
     {% include 'messages.html' %}
 
     {% block body %}
 
+    {% endblock %}
+    
 
-
+   
+  <script src="{% static 'js/app.js' %} "></script>  
+{% block extrajs %}
+{% endblock %} 
+</body>
+<footer>
+    
+    {% block footer %}
+         
     {% endblock %}
 
-
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        } );
-        $(".datepicker").datepicker();
-<!--        $(document).on('click', '.confirm-delete', function(){-->
-<!--            return confirm('Are you sure you want to delete this?');-->
-<!--        });-->
-
-        $(document).on('click', '.confirm-delete', function () {
-          $("#confirmDeleteModal").attr("caller-id", $(this).attr("id"));
-        });
-
-        $(document).on('click', '#confirmDeleteButtonModal', function () {
-          var caller = $("#confirmDeleteButtonModal").closest(".modal").attr("caller-id");
-          window.location = $("#".concat(caller)).attr("href");
-        });
-
-    </script>
-</body>
+</footer>
 </html>

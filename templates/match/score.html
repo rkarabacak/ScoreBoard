@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load  crispy_forms_tags %}
+
+{% block body %}
+    <div id="license-index" class="container-fluid pt-5 px-5">
+             <div class="row mb-3 ml-2" >
+                 <input type="button" class="btn btn-outline-primary btn-k2m" onclick="location.href='{% url 'match:match' %}'" value="GERİ DÖN">
+             </div>
+          <div class="table-responsive-sm">
+            <table id="example" class="table table-hover table-fixed" style="width:100%">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Maç Numarası</th>
+                        <th>Oyuncu 1</th>
+                        <th>Oyuncu 2</th>
+                        <th>Kazanan</th>
+                        <th>Beraberlik</th>                        
+                        <th>Son Vuruş Hakkı</th>                        
+                        <th>Sayı Sınırı</th>                        
+                        <th>Istaka Sınırı</th>                        
+                        <th>Tarih</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for score in scores %}
+                    <tr >
+                        <td><a href="{% url 'match:detail' score.id %}">{{ score.id }}</a></td>
+                        <td>{{ score.palyer1_name }}</td>
+                        <td>{{ score.player2_name }}</td>
+                        <td>{{ score.palyer1_name }}</td>
+                        <td>{{ score.palyer1_name }}</td>              
+                        <td>{{ score.allow_draw }}</td>              
+                        <td>{{ score.last_shoot }}</td>              
+                        <td>{{ score.score_limit }}</td>              
+                        <td>{{ score.inning_limit }}</td>              
+                    </tr>
+                 {% endfor %}
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+{% endblock %}

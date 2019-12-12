@@ -1,0 +1,125 @@
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content">
+            {% comment %} <div class="modal-header"></div> {% endcomment %}
+            <div class="modal-body">
+                <div class="row mx-md-n5 justify-content-center ">
+                    <div class="col-4 px-md-2 pt-2 text-center">                        
+                        <div id="player1-card" class="card ">
+                            <div class="card-header _text">
+                                <h1 >OYUNCU 1</h1>
+                            </div>
+                            <div id="player1-card-body" class="card-body ">
+                                <input id="player1_score" type="text" class="score _text" value="0">                                
+                            </div>
+                            <div id="player1_foul"class="row form-group justify-content-center">                    
+                                <div id="p1_f3" class="foul-box bg-success"></div>                                    
+                                <div id="p1_f2" class="foul-box bg-success"></div>
+                                <div id="p1_f1" class="foul-box bg-success"></div>                               
+                            </div>
+                        </div>                                             
+                    </div>
+                     <div class="col-3 px-md-2 pt-2 mx-4 text-center">
+                        <div class="card mt-5">
+                            <div class="card-header _text">
+                                <h1 >ISTAKA</h1>
+                            </div>
+                            <div class="card-body">
+                                <input id="input_innings" type="text" class="innings _text" value="0">                                
+                            </div>
+                        </div>
+                    </div>                          
+                    <div class="col-4 px-md-2 pt-2 text-center " >
+                        <div id="player2-card" class="card">
+                            <div class="card-header _text_yellow">
+                                <h1 >OYUNCU 2 </h1>
+                            </div>
+                            <div class="card-body">
+                                <input id="player2_score" type="text" class="score _text_yellow" value="0">                                
+                            </div>
+                            <div id="player2_foul"class="row justify-content-center">                    
+                                <div id="p2_f3" class="foul-box bg-success"></div>                                    
+                                <div id="p2_f2" class="foul-box bg-success"></div>
+                                <div id="p2_f1" class="foul-box bg-success"></div>                               
+                            </div>
+                        </div>     
+                    </div>
+                </div>                
+                <div class="row pt-3 mx-md-n5 justify-content-center ">
+                    <div class="col-4 px-md-2 pt-2 text-center">
+                        <div class="row pb-4">
+                            <div class="col">
+                                <div class="card">                                                        
+                                    <div class="card-body">
+                                        <h1 class="_text">EYS1 </h1>
+                                        <input id="p1_eys1" type="text" class="eys _text " value="0">
+                                    </div>                            
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">                                    
+                                    <div class="card-body">
+                                        <h1 class="_text">EYS2 </h1>
+                                        <input id="p1_eys2" type="text" class="eys _text" value="0">
+                                    </div>                                                             
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">                            
+                            <div class="card-body">
+                                <h1 class="_text">ORTALAMA</h1>
+                                <input id="p1_scoreavg" type="text" class="ortalma _text" value="0">
+                            </div>                             
+                        </div>                                             
+                    </div>             
+                    <div class="col-3 px-md-2 mx-4 text-center">
+                        <div id="runs"  class="card">
+                            <div class="card-header _text">
+                                <h1 >SERİ</h1>
+                            </div>
+                            <div id="runs" class="card-body">
+                                <input id="run_score" type="text" class="innings _text" value="0">                                
+                            </div>                            
+                        </div>    
+                    </div>
+                    <div class="col-4 px-md-2 pt-2 text-center">
+                        <div class="row pb-4">
+                            <div class="col">
+                                <div class="card">                                                        
+                                    <div class="card-body">
+                                        <h1 class="_text">EYS1 </h1>
+                                        <input id="p2_eys1" type="text" class="eys _text " value="0">
+                                    </div>                            
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card">                                    
+                                    <div class="card-body">
+                                        <h1 class="_text">EYS2 </h1>
+                                        <input id="p2_eys2" type="text" class="eys _text" value="0">
+                                    </div>                                                             
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">                            
+                            <div class="card-body">
+                                <h1 class="_text">ORTALAMA</h1>
+                                <input id="p2_scoreavg" type="text" class="ortalma _text" value="0" step="0.01">
+                            </div>                             
+                        </div>                                             
+                    </div>  
+                
+                </div>
+                
+                <div id="id_progress" class="row pt-3  justify-content-center ">
+                    <div class="container-progress text-center">
+                        <div id="mybar" class="bg-success text-end" style="height:90px;width:100%" ></div>
+                        <span id="span_time" class="_text">40</span>
+                    </div>
+                </div>
+            </div>
+            {% include 'controller-modal.html' %}
+            {% comment %} <div class="modal-footer"></div> {% endcomment %}
+        </div>
+    </div>   
+</div>

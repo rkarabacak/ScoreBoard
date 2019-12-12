@@ -1,5 +1,5 @@
 body{
-	font-family: 'Roboto', sans-serif; /* online verdiðimiz google font adresinden fontu çekiyoruz*/
+	font-family: 'Roboto', sans-serif; /* online verdiï¿½imiz google font adresinden fontu ï¿½ekiyoruz*/
 	margin: 0;
 	padding:0 ;
 	/*background: url("/static/media/bg.jpg") 100% 0 no-repeat fixed ;

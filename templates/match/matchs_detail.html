@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load  crispy_forms_tags %}
+
+{% block body %}
+  
+<h3>Book detail</h3>
+<table class="table">
+    <thead class="thead-dark table-bordered">
+        <tr>
+            
+            <th>Maç id</th>
+            <th>Oyuncu 1</th>
+            <th>Oyuncu 2</th>
+            <th>Kazanan</th>
+            <th>Beraberlik</th>                        
+            <th>Son Vuruş Hakkı</th>                        
+            <th>Sayı Sınırı</th>                        
+            <th>Istaka Sınırı</th>                        
+            <th>Tarih</th>                        
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            
+            <td>{{ matchs.id }}</td>
+            <td>{{ matchs.player1_name }}</td>
+            <td>{{ matchs.player2_name }}</td>
+            <td>{% if matchs.status == 0 %} {{ matchs.player1_name }} {% else %} {{ matchs.player2_name }} {% endif %}</td>                         
+            <td>{% if matchs.allow_draw == 0 %} YOK {% else %} VAR {% endif %}</td>              
+            <td>{% if matchs.last_shoot == 0 %} YOK {% else %} VAR {% endif %}</td>              
+            <td>{% if matchs.score_limit == 0 %} YOK {% else %} {{ matchs.score_limit }} {% endif %}</td>              
+            <td>{% if matchs.inning_limit == 0 %} YOK {% else %} {{ matchs.inning_limit }} {% endif %}</td>
+            <td>TODO</td>
+        </tr>
+    </tbody>
+</table>
+<div class="row mb-3 ml-2" >
+    <input type="button" class="btn btn-outline-primary btn-k2m" onclick="location.href='{% url 'match:match' %}'" value="GERİ DÖN">
+</div> 
+            
+{% endblock %}

@@ -22,8 +22,13 @@
   <component name="ProjectId" id="1R5kiokBFFduzjxWmd7sg5fonSG" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/git-bash.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/match" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programlama\Python\Projeler\Web\Score_Board\match" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

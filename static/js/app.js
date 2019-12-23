@@ -2,12 +2,8 @@
 
 var children = Array.from(document.getElementsByClassName('iter'));
 // children.forEach(child => console.log(child.id))
-children[0].focus();
-console.log("Uzunluk: "+children.length)
-tt = $('#id_player1_name').val();
-console.log("id: "+tt)
-
-
+// children[0].focus();
+// console.log("Uzunluk: "+children.length)
 
 // $(document).ready(function () {
 //     $(function doConnect() { 
@@ -23,7 +19,7 @@ console.log("id: "+tt)
 // HOME BUTTON
 $("#button_home-modal").click(function(){
          
-    $('#btn2').click();
+    $('#btn-match-switch').click();
 });
 
 var run_list =[]
@@ -44,12 +40,20 @@ var run_obj = {
     p2_scoreavg:'',
     run:''
 }
+
+var finish_status = {
+    winner_player1:0,
+    winner_player2: 1,
+    draw: 2,
+    cancelled: 3,
+    postponed: 4,
+
+}
 // BUTTON B PROGRESS
-// var countdown_limit = [40, 40, 80, 120];
-var frame_time = [400, 800, 1200, 1600];
-var frame_time2 = 50;
+var p1_foul_limit = 0;
+var p2_foul_limit = 0;
+var count_secons = 20;
 var current_timeout = 0;
-// var limit = countdown_limit[current_timeout];
 var current_countdown_limit = 10;
 var foul_value;
 var bar;
@@ -57,72 +61,232 @@ var secons;
 var isPaused = false;
 var width = 100;
 var elem;
-var foul_limit_counter_2 =0;
+var minus = -1;
+var plus = 1;
+var value__;
+
+
 var foul_limit_counter = 0;
 var player_status = 1;
+var player_switch = 0; // Oyuncu Yer değiştir
+var p_name_switch = 0; // Oyun İsim kaydet
+var color_switch = 0;
+var Player1_name = 'OYUNCU 1';
+var Player2_name= 'OYUNCU 2';
 
 
 
 $(document).ready(function(){
-    function finih (){
+    
+    $('#btn-last-innings span').html(document.getElementById('id_last_shoot').options['selectedIndex', 0].text);
+    $('#btn-drawn span').html(document.getElementById('id_allow_draw').options['selectedIndex', 0].text);
+    $('#btn-btn-run-limit span').html(document.getElementById('id_active_run').options['selectedIndex', 0].text);
+    $('#btn-innings-limit span').html(document.getElementById('id_inning_limit').options['selectedIndex', 0].text);
+    $('#btn-timeout-limit span').html(document.getElementById('id_timeout_limit').options['selectedIndex', 0].text);
+    $('#btn-run-limit span').html(document.getElementById('id_active_run').options['selectedIndex', 0].text);
+    $('#btn-timer span').html(document.getElementById('id_time_force').options['selectedIndex', 0].text);
+    $('#id_player1_name').val(Player1_name);
+    $('#id_player2_name').val(Player2_name);
+     // OYUNCU 1 ve 2  YER DEĞİŞİMİ
+     $('#btn-name-switch').click(function (e) {
+        // player_switch = (player_switch==0) ? (player_switch=1 ) : (player_switch=0);
+        if (player_switch == 0){            
+            $('#id_player1_name').val(Player2_name);
+            $('#id_player2_name').val(Player1_name);            
+            $('#id_positions_switched').val(player_switch);
+            console.log("Player_status: "+player_switch+"| p1_name:  "+Player2_name + " | "+"p2_name: "+Player1_name)
+            player_switch = 1;
+            console.log(player_switch)
+        }else { 
+            $('#id_player1_name').val(Player1_name);
+            $('#id_player2_name').val(Player2_name);            
+            $('#id_positions_switched').val(player_switch);
+            console.log("Player_status: "+player_switch+"| p1_name:  "+Player1_name + " | "+"p2_name: "+Player2_name)           
+            
+            player_switch = 0;
+            console.log(player_switch)
+        }      
+      
+    });
+    // TOPLARI DEĞİŞİMİ
+    $('#btn-color-switch').click(function (e) {
+        // player_switch = (player_switch==0) ? (player_switch=1 ) : (player_switch=0);
+        if (color_switch == 0){
+            color_switch = 1;
+            $('#player1-card div:first-child').removeClass('_text').addClass('_text_yellow');            
+            $('#player2-card div:first-child').removeClass('_text_yellow').addClass('_text');            
+            $('#player1_score').removeClass('_text').addClass('_text_yellow');            
+            $('#player2_score').removeClass('_text_yellow').addClass('_text');
+            $('#id_color_switched').val(color_switch);            
+            
+        }else {
+            color_switch = 0;
+            $('#player1-card div:first-child').removeClass('_text_yellow').addClass('_text');
+            $('#player2-card div:first-child').removeClass('_text').addClass('_text_yellow');
+            $('#player1_score').removeClass('_text_yellow').addClass('_text');            
+            $('#player2_score').removeClass('_text').addClass('_text_yellow');
+            $('#id_color_switched').val(color_switch);  
+        }
         
-    }
+        e.preventDefault();
+        console.log('Player Status: '+player_switch)
+    });
+    // MAÇA DÖN btn-match-switch
+    $('#btn-match-switch').click(function (e) {
+        
+        $('#p1_name').text($('#id_player1_name').val());
+        $('#p2_name').text($('#id_player2_name').val());
+        
+    });
+    // btn-player1_Name
+    $('#btn-player1_Name').click(function (e) { 
+        p_name_switch = 0;
+        if(player_switch==0){
+            $('#write').text(Player1_name);
+        }else{
+            $('#write').text(Player2_name);
+        }
+       
+        
+        
+    });
+    // btn-player2_Name
+    $('#btn-player2_Name').click(function (e) { 
+        p_name_switch = 1;
+        if(player_switch==0){
+            $('#write').text(Player2_name);
+        }else{
+            $('#write').text(Player1_name);
+        }
+        
+        
+    });
+     //PLAYER NAMES     
+     $('#btn-playerName-submit').click(function (e) {
+        if (p_name_switch==0){
+             
+            Player1_name = $('#write').val();
+        }else {
+            Player2_name = $('#write').val();
+         }
+        // if ( player_switch==0){
+        //     Player1_name = $('#player1-name-modal').val();
+        //     Player2_name = $('#player2-name-modal').val();
+        //     console.log("p1_name:  "+Player1_name + " | "+"p2_name: "+Player2_name)
+            
+        // } else{
+        //     Player1_name = $('#player2-name-modal').val();
+        //     Player2_name = $('#player1-name-modal').val();
+            
+        // }
+        $('#p1_name').text(Player1_name);
+        console.log("P1N:"+Player1_name)
+        $('#id_player1_name').val(Player1_name);
+        console.log("getp1n: "+$('#id_player1_name').val())
+        $('#p2_name').text(Player2_name);
+        $('#id_player2_name').val(Player2_name);
+        console.log("Player_status: "+player_switch+"| p1_name:  "+Player1_name + " | "+"p2_name: "+Player2_name)
+        
+        
+    });    
+    
+    $('#span_time').text(count_secons); // sayacın varsayılan dğerini atar
     current_timeout = parseInt($('#id_timeout_limit').val(), 10);
     foul_value = current_timeout    
     // BUTTON_1 FOUL PLUS PROGGRESS
     $('#btn_1-modal').click(function (e) {        
-        console.log("foul_value_plus: "+foul_value)        
-        console.log("foul_limit_counter_2: "+foul_limit_counter_2)        
-        if (foul_value > 0){
-            
-            if(foul_limit_counter===foul_value){
+        console.log("foul_value_plus: "+foul_value)
+        
+        if(player_status==1){
+            if (foul_value > 0){
+                if(p1_foul_limit===foul_value){
                 
-            }else if (foul_value > foul_limit_counter){
-                current_countdown_limit +=40;
-                frame_time2 += 50;              
-                    
-                foul_limit_counter++;
-                foul_limit_counter_2 = foul_limit_counter;
-                $('#p'+player_status+'_f'+foul_limit_counter).removeClass('bg-success').addClass('bg-danger');
-                console.log("foul_limit_counter_plus: "+foul_limit_counter)
-            } 
-               
-                 
-        }        
+                }else if (foul_value > p1_foul_limit){
+                    current_countdown_limit +=count_secons;                        
+                    p1_foul_limit++;                    
+                    $('#p'+player_status+'_f'+p1_foul_limit).removeClass('bg-success').addClass('bg-danger');
+                    console.log("p1_foul_limit: "+p1_foul_limit)
+                }
+            }     
+        }else {
+            if (foul_value > 0){
+                if(p2_foul_limit===foul_value){
+                
+                }else if (foul_value > p2_foul_limit){
+                    current_countdown_limit +=count_secons;                        
+                    p2_foul_limit++;                    
+                    $('#p'+player_status+'_f'+p2_foul_limit).removeClass('bg-success').addClass('bg-danger');
+                    console.log("p2_foul_limit: "+p2_foul_limit)
+                } 
+            }   
+        }
     });
     // BUTTON_2 FOUL MINUS
     $('#btn_2-modal').click(function (e) {        
-        // console.log("foul_value_minus: "+foul_value)
-        // console.log("foul_limit_counter_2: "+foul_limit_counter_2)
-        // console.log("foul_limit_counter: "+foul_limit_counter)
-        
-        
-        if ((foul_limit_counter <= 3) && (foul_limit_counter > 0)){
-            console.log("Sec: "+current_countdown_limit)
-            if (current_countdown_limit > 40){
-                current_countdown_limit -=40;
-            }            
-            $('#p'+player_status+'_f'+foul_limit_counter).removeClass('bg-danger').addClass('bg-success');
-            foul_limit_counter = foul_limit_counter -1;
-            foul_limit_counter_2 = foul_limit_counter;
-
-            console.log("foul_limit_counter_minus: "+foul_limit_counter)                      
-        }         
+        if(player_status==1){
+            if ((p1_foul_limit <= 3) && (p1_foul_limit > 0)){                
+                $('#p'+player_status+'_f'+p1_foul_limit).removeClass('bg-danger').addClass('bg-success');               
+                if (current_countdown_limit > count_secons){ 
+                    current_countdown_limit -=count_secons;                                                                  
+                }
+                if ( p1_foul_limit >0){                        
+                    p1_foul_limit-=1;
+                }                     
+                console.log("p1_foul_limit: "+p1_foul_limit)                      
+            }         
+        }else{
+            if ((p2_foul_limit <= 3) && (p2_foul_limit > 0)){ 
+                $('#p'+player_status+'_f'+p2_foul_limit).removeClass('bg-danger').addClass('bg-success');               
+                if (current_countdown_limit > count_secons){ 
+                    current_countdown_limit -=count_secons;                                                                               
+                }
+                if ( p2_foul_limit >0){                        
+                    p2_foul_limit-=1;
+                }                                                  
+                console.log("p2_foul_limit: "+p2_foul_limit)                      
+            }      
+        }     
     });
     // TIMEOUT LIMIT
     $('#id_timeout_limit').change(function (e) { 
         current_timeout = parseInt($('#id_timeout_limit').val(), 10);
         console.log("Change_time: "+current_timeout) 
         // return current_timeout;       
-    });    
+    });
+    // MAC İPTAL    
+    $('#btn-iptal-modal').click(function (e) {       
+        $('#id_status').val(finish_status.cancelled);
+    }); 
+    //MAÇ HUKMEN OYUNCU 1 KAZANDI
+    $('#p1-hukmen').click(function (e) {         
+        $('#id_status').val(finish_status.winner_player1);        
+    });
+    // MAÇ HUKMEN OYUNCU 2 KAZANDI
+    $('#p2-hukmen').click(function (e) {        
+        $('#id_status').val(finish_status.winner_player2);        
+    });   
     
-    $('#myModal').on('load', function() {               
+    $('#match-save-modal').on('load', function() {
+        
+                       
         
      }) 
     // INIT PLAYER
     $('#player1-card').addClass('_player1-card');
     $('#button_a-modal').click(function (e) {
         let total_innings = parseInt($('#input_innings').val(), 10);
+        if (current_countdown_limit==0){
+            if ((p1_foul_limit<3)||(p2_foul_limit<3)){
+                if(player_status===1) {  
+                    p1_foul_limit +=1;
+                    $('#p'+player_status+'_f'+p1_foul_limit).removeClass('bg-success').addClass('bg-danger');
+                }else{
+                    p2_foul_limit +=1;
+                    $('#p'+player_status+'_f'+p2_foul_limit).removeClass('bg-success').addClass('bg-danger');
+                }
+            }    
+        }    
+            
         if ($('#player1-card').hasClass('_player1-card')){
             $('#player1-card').removeClass('_player1-card');
             $('#player2-card').addClass('_player2-card');
@@ -164,7 +328,7 @@ $(document).ready(function(){
             //     "run: "+run_obj.run
             // ) 
             player_status = 2;
-            frame_time2 = 400;
+            
             console.log("width: "+width) 
             // if (width === 0){
             //     foul_limit_counter += 1;
@@ -210,14 +374,13 @@ $(document).ready(function(){
             //     "p2_scoreavg: "+run_obj.p2_scoreavg+"\n",
             //     "run: "+run_obj.run
             // )
-            player_status = 1;
-            frame_time2 = 400;  
+            player_status = 1;              
         }
         // const peopleArray = Object.keys(run_obj).map(i => run_obj[i])
         run_list.push(JSON.stringify(run_obj))
         console.log(run_list)
         $('#run_score').val(0);
-        current_countdown_limit = 40;
+        current_countdown_limit = count_secons;
         clearInterval(bar);
         clearInterval(secons);
         isPaused = false;
@@ -225,8 +388,6 @@ $(document).ready(function(){
         elem.style.width = width + '%';
         $('#span_time').html(current_countdown_limit);
         $('#mybar').removeClass('bg-danger').addClass('bg-success');
-        
-        // foul_limit_counter = 0;         
     });   
     
     //COUNTDOWN PROGRESS Bar olarak 
@@ -234,87 +395,155 @@ $(document).ready(function(){
     $('#button_b-modal').click(        
         function start(e) {            
             console.log(isPaused)
-            if (!isPaused){                
-                // console.log("button_b")            
+            if (!isPaused){                          
                 elem = document.getElementById("mybar");                 
-                console.log('current_countdown_limit'+current_countdown_limit)
-                // console.log(countdown_limit[current_timeout])
-                // console.log("start_time: "+current_timeout)                
-                             
+                console.log('current_countdown_limit'+current_countdown_limit)                 
                 bar = setInterval(frame, 1000);
                 secons = setInterval(frame2, 1000);
                 function frame() {
                     if (width <= 0) {
                         clearInterval(bar);
                     } else if ( foul_limit_counter === 0){
-                        bar_width = width / current_countdown_limit;
-                        // console.log("Bar-width: "+bar_width)
-                        // console.log("width: "+width)
-                        // console.log("Secons: "+current_countdown_limit)
-                        width= width - bar_width        
-                        elem.style.width = width + '%';
-                        // console.log("frame_time: "+frame_time2)        
-                    }else if ( foul_limit_counter == 1){
-                        // console.log("Bar-width: "+bar_width)
-                        // console.log("width: "+width)
-                        // console.log("Secons: "+current_countdown_limit)
                         bar_width = width / current_countdown_limit;                        
                         width= width - bar_width        
-                        elem.style.width = width + '%';
-                        // console.log("frame_time: "+frame_time2)
-                    }else if ( foul_limit_counter == 2){
-                        // console.log("Bar-width: "+bar_width)
-                        // console.log("width: "+width)
-                        // console.log("Secons: "+current_countdown_limit)
+                        elem.style.width = width + '%';                                
+                    }else if ( foul_limit_counter == 1){                       
+                        bar_width = width / current_countdown_limit;                        
+                        width= width - bar_width        
+                        elem.style.width = width + '%';                        
+                    }else if ( foul_limit_counter == 2){                        
                         bar_width = width / current_countdown_limit;                        
                         width= width - bar_width           
-                        elem.style.width = width + '%';
-                        // console.log("frame_time: "+frame_time2)
+                        elem.style.width = width + '%';                   
                     }
-                    else if ( foul_limit_counter == 3){
-                        // console.log("Bar-width: "+bar_width)
-                        // console.log("width: "+width)
-                        // console.log("Secons: "+current_countdown_limit)
+                    else if ( foul_limit_counter == 3){                       
                         bar_width = width / current_countdown_limit;                        
                         width= width - bar_width              
-                        elem.style.width = width + '%';
-                        // console.log("frame_time: "+frame_time2)
-                    }
-                    return width
+                        elem.style.width = width + '%';                       
+                    }                    
                 }
                 //COUNTDOWN PROGRESS Sayısal olarak
                 function frame2() {
                     if (current_countdown_limit <= 0) {
                         clearInterval(secons);
                         $('#span_time').text(" FOUL");
-                        elem.style.width = '100%';
-                        
+                        elem.style.width = '100%';                       
                     }else{    
                         $('#span_time').html(current_countdown_limit-=1);
-                            if (current_countdown_limit <= 10){
+                            if (current_countdown_limit <= (count_secons/5)){
                                 $('#mybar').removeClass('bg-success').addClass('bg-danger');                    
-                            }
-                        // return current_countdown_limit                                        
-                    }
-                    
+                            }                                                               
+                    }                    
                 }
-                isPaused = true                  
-            
+                isPaused = true           
             } else{               
                 clearInterval(bar);
                 clearInterval(secons);
                 $('#span_time').text(current_countdown_limit+" PAUSED");
                 isPaused = false;        
-            }
+            }            
         }
     );
 
+    //btn-timer
+    let timer_i=0;  
+    $('#btn-timer').click(function (e) {        
+        let x = document.getElementById('id_time_force')
+        let xx = $('#id_time_force')        
+        if (timer_i==0){
+            xx.prop("selectedIndex", timer_i).val()           
+            $('#btn-timer span').html(x.children[timer_i].text);
+            timer_i=1;
+        }else {
+            xx.prop("selectedIndex", timer_i).val()           
+            $('#btn-timer span').html(x.children[timer_i].text);
+            timer_i=0;
+        }       
+    });  
 
-    // BUTTON_A-MODAL SAYI EKLEME
+    //btn-last-innings
+    let lastshoot_i=0;  
+    $('#btn-last-innings').click(function (e) {        
+        let x = document.getElementById('id_last_shoot')
+        let xx = $('#id_last_shoot')        
+        if (lastshoot_i==0){
+            xx.prop("selectedIndex", lastshoot_i).val()           
+            $('#btn-last-innings span').html(x.children[lastshoot_i].text);
+            lastshoot_i=1;
+        }else {
+            xx.prop("selectedIndex", lastshoot_i).val()           
+            $('#btn-last-innings span').html(x.children[lastshoot_i].text);
+            lastshoot_i=0;
+        }       
+    });  
 
+    //btn-drawn
+    let draw_i=0;  
+    $('#btn-drawn').click(function (e) {        
+        let x = document.getElementById('id_allow_draw')
+        let xx = $('#id_allow_draw')        
+        if (draw_i==0){
+            xx.prop("selectedIndex", draw_i).val()           
+            $('#btn-drawn span').html(x.children[draw_i].text);
+            draw_i=1;
+        }else {
+            xx.prop("selectedIndex", draw_i).val()           
+            $('#btn-drawn span').html(x.children[draw_i].text);
+            draw_i=0;
+        }       
+    });  
+
+    // btn-run-limit
+    let active_i = 1;
+    $('#btn-run-limit').click(function (event, value__) {
+        let x = document.getElementById('id_active_run')
+        let xx = $('#id_active_run')        
+        if (active_i==x.length){
+            active_i = 0;
+        }else if(active_i < x.length){
+            xx.prop("selectedIndex", active_i).val()           
+            $('#btn-run-limit span').html(x.children[active_i].text);
+            if ((value__< 0) && (active_i==0)){
+
+                active_i = x.length;
+            }
+            active_i +=value__ 
+        }       
+    });  
+
+    // btn-innings-limit
+    let inning_i = 1;
+    $('#btn-innings-limit').click(function (event, value__) {
+        console.log("e.data.minus: "+value__)
+        let x = document.getElementById('id_inning_limit')
+        let xx = $('#id_inning_limit')        
+        if (inning_i==x.length){
+            inning_i = 0;
+        }else if(inning_i < x.length){
+            xx.prop("selectedIndex", inning_i).val()           
+            $('#btn-innings-limit span').html(x.children[inning_i].text);
+            if ((value__< 0) && (inning_i==0)){
+
+                inning_i = x.length;
+            }
+            inning_i +=value__ 
+        }       
+    });
     
+    // btn-timeout-limit
+    let timeout_i = 1;
+    $('#btn-timeout-limit').click(function (e) {
         
-        
+        let x = document.getElementById('id_timeout_limit')
+        let xx = $('#id_timeout_limit')        
+        if (timeout_i==x.length){
+            timeout_i = 0;
+        }else if(timeout_i < x.length){
+            xx.prop("selectedIndex", timeout_i).val()
+            $('#btn-timeout-limit span').html(x.children[timeout_i].text);
+            timeout_i++;
+        }       
+    }); 
    
 
     // FOUL BUTTON     
@@ -331,51 +560,52 @@ $(document).ready(function(){
         }else if (foul_value == 1){
             $('#p1_f3, #p2_f3').hide();
             if (!$('#p1_f2, #p2_f2').hide()){
-                $('#p1_f2, #p2_f2').hide();
-                
+                $('#p1_f2, #p2_f2').hide();                
             }
             $('#p1_f1, #p2_f1').show();
         }else if (foul_value == 0){
            $('#player2_foul, #player1_foul').children().hide();
-        }
-        return foul_value;
+        }        
      });
 
-     //PLAYER NAMES
-     
-     $('#btn-playerName-submit').click(function (e) { 
-         let p1n = $('#player1-name-modal').val();
-         let p2n = $('#player2-name-modal').val();
-         console.log("p1_name:  "+p1n + " | "+"p2_name: "+p2n)
-         $('#id_player1_name').val(p1n);
-         $('#id_player2_name').val(p2n);
-         
-     });
-    //  $('#id_player1_name, #id_player2_name').change(function (e) { 
-    //     let player1_name = $('#id_player1_name').val();
-    //     let player2_name = $('#id_player2_name').val();
-    //     console.log("p1_name:  "+player1_name + " | "+"p2_name: "+player2_name)
-    //     console.log("p2_name: "+player2_name)
-         
-    //  });
-     
-     
+    // BUTTON_A Maç Ayarları
+    $('#button_a').click(function (e) { 
+        value__ = plus        
+        $(children[iter_current]).trigger('click',[value__])    
+    });
 
-    // PLUS BUTTON
+
+    //BUTTON_PLUS-MODAL
     $("#plus_id-modal").click(function(){
         let plus = 1;
         let value_ = parseInt($('#run_score').val(), 10);
-        console.log("Plus: "+value_)        
-        $('#run_score').val(value_ + 1);
+        console.log("Plus: " + value_)
+        if (value_ >= 0){
+            $('#run_score').val(value_ + plus);
+        }    
+    }); 
+    //  BUTTON_PLUS
+    let button_plus = 0;
+    $("#button_plus").click(function(){
+        value__= plus
+        $(children[iter_current]).trigger('click',[value__])             
+       
     });
-    // MINUS BUTTON
+
+    //BUTTON_MINUS-MODAL
     $("#minus_id-modal").click(function(){
-        let plus = 1;
+        let minus = 1;
         let value_ = parseInt($('#run_score').val(), 10);
         console.log("Minus: " + value_)
         if (value_ >= 1){
-            $('#run_score').val(value_ - 1);
-        }         
+            $('#run_score').val(value_ - minus);
+        }    
+    }); 
+    // BUTTON_MINUS 
+    $("#button_minus").click(function(){
+        value__= minus
+        $(children[iter_current]).trigger('click',[value__])       
+
     });   
   });
   
@@ -532,23 +762,23 @@ var iter_current = 0;
 // };
 
 function upItem() {
-    if ((iter_current - 5) < 0){
+    if ((iter_current - 4) < 0){
 
     }else{
-        iter_current = iter_current -5        
+        iter_current = iter_current -4        
     }   
     document.getElementById(children[iter_current].id).focus();  
-    console.log(iter_current)
+    console.log("iter_up: "+iter_current)
     return iter_current
 };
 function downItem() {
-    if (iter_current > (iterLength - 6)){
+    if (iter_current > (iterLength - 5)){
 
     }else{
-        iter_current = iter_current + 5       
+        iter_current = iter_current + 4       
     }     
     document.getElementById(children[iter_current].id).focus();  
-    console.log(iter_current, children[iterLength].nodeName)
+    console.log("iter_down: "+iter_current)
     return iter_current
 };
 
@@ -559,7 +789,7 @@ function nextItem() {
         iter_current = iter_current + 1
         
     }      
-    console.log(iter_current)
+    console.log("Element index: "+iter_current)
     document.getElementById(children[iter_current].id).focus()    
     return iter_current
 };
@@ -572,7 +802,7 @@ function prevItem() {
         iter_current = iter_current - 1
     }
     document.getElementById(children[iter_current].id).focus()       
-    console.log(iter_current)
+    console.log("Element index: "+iter_current)
     return iter_current
        
 };

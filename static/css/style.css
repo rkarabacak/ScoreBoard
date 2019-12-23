@@ -5,6 +5,81 @@ body{
     background-color: whitesmoke;
 
 }
+
+#playerName-modal .modal-header,
+#playerName-modal .modal-body,
+#playerName-modal .modal-footer{    
+    background: rgb(54, 54, 54);
+    padding: 1rem !important;
+}
+
+#playerName-modal .modal-header{
+    height: 100px !important;
+    display: block !important;
+}
+
+#playerName-modal .modal-footer{
+    display: block;
+    
+    border-top:none !important;
+    height: 100% !important;
+}
+
+#playerName-modal button{
+    width: 700px;
+    height: 70px;
+    margin-top: 2rem;
+    /* border-radius: 5px !important; */
+    
+}
+#playerName-modal .modal-content{
+    background-color:rgb(15, 15, 15, 1);
+   
+}
+
+/* Maçı Bitir */
+#match-save-modal .modal-header,
+#match-save-modal .modal-body,
+#match-save-modal .modal-footer{    
+    background: rgb(54, 54, 54);
+    padding: 1rem !important;
+}
+
+#match-save-modal .modal-header{
+    height: 300px !important;
+}
+/* Maçı Kazanan Player Seç*/
+#player-select-modal .modal-header,
+#player-select-modal .modal-body,
+#player-select-modal .modal-footer{    
+    background: rgb(54, 54, 54);
+    padding: 1rem !important;
+}
+
+#player-select-modal .modal-header{
+    height: 150px !important;
+    display: block !important;
+}
+
+#player-select-modal .modal-footer{
+    display: block;
+    
+    border-top:none !important;
+    height: 100% !important;
+}
+
+#player-select-modal button{
+    width: 700px;
+    height: 70px;
+    margin-top: 2rem;
+    /* border-radius: 5px !important; */
+    
+}
+#player-select-modal .modal-content{
+    background-color:rgb(15, 15, 15, 1);
+   
+}
+
 #id_controller{
     height: 100px;
     position: relative;
@@ -34,6 +109,29 @@ body{
     width: 100%;
     height: 100%;
     background:rgba(255,255,255,0.5);
+}
+
+/* #match-menu .col{
+    border: .1em solid red;
+
+} */
+
+#match-menu button{
+    width: 300px;
+    height: 70px;
+    padding: 1rem;
+    margin: .5rem;
+
+}
+#match-menu button:focus{
+    color:white;
+    background-color: #007bff;
+
+}
+
+#match-menu span{
+    font-size: 1rem;
+
 }
 
 footer{
@@ -158,6 +256,12 @@ input {
 .modal-header {
     height:50px;
 }
+#match-save-modal .modal-header{
+    display:block !important;
+    height:80px !important;
+}
+    
+
 
 .modal-body {
     height:100%;
@@ -171,30 +275,14 @@ input {
     height:200px;
 }
 
-#playerName-modal .modal-footer {
-    height:100%;
-    background-color:rgb(65, 63, 66);
-}
-
-#playerName-modal .modal-header {
-    height:100%;
-    background-color:rgb(11, 121, 26);
-}
-
-#playerName-modal .modal-body{
-    height:150px;
-    background-color:rgb(65, 63, 66);
-}
 
 .button-focus{
     box-shadow: 0 0 0 2px #ffffff, 0 0 3px 5px #3a97f9;
 }
 
-/* #mybar .progress-bar{
-    height: 150px !important;
-} */
-
-
+.uniForm{
+    display: block;
+}
 
 .foul-box{
     width: 150px;
@@ -229,6 +317,13 @@ input {
     height: 75px !important;
     background-color: transparent;
 }
+
+#finih-modal-footer button{
+    width: 400px;
+    height: 75px;
+}
+
+
 /* run.html CSS  */
 
 

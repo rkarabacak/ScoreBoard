@@ -5,33 +5,65 @@
      <div id="id_container" class="container-flued">
       <div class="row">
           <div class="col-md-9 mx-auto">
-                <div class="pb-2 my-4 border-bottom">
+                {% comment %} <div class="pb-2 my-4 border-bottom">
                   <h2 class="mx-5" >Maç Tablosu</h2>
-                </div>
+                </div> {% endcomment %}
               <Form method="POST" class="uniForm" enctype="multipart/form-data">
                   {% csrf_token %}                  
                   {% crispy form %}                  
                   
-                  <input id="btn1" type="button" onclick="location.href='{% url 'match:score' %}'" class="iter btn btn-outline-primary mt-5 mx-3 " value="Maç Sonuçları">                        
-                  <input id="btn2" type="button" data-toggle="modal" data-target="#myModal" class="iter btn btn-outline-primary mt-5 mx-3" value="Maça Dön">                        
-                  <input id="btn-playerName" type="button" data-toggle="modal" data-target="#playerName-modal" class="iter btn btn-outline-primary mt-5 mx-3" value="OYUNCU ISMI">                        
-                  <input id="btn-match-finis" type="button" class="iter btn btn-outline-primary mt-5 mx-3" value="MAÇI BİTİR">                        
+                                          
+                                          
+                                          
+                                          
+                                         
+                  
+                                         
+                                          
               </form>
               
               
           </div>
       </div>
+      <div id="match-menu" class="row mt-5">
+        <div class="col"><button id="btn-match-switch" data-toggle="modal" data-target="#myModal" class="iter btn btn-outline-primary">MAÇA DÖN<span></span></button></div>
+        <div class="col"><button id="btn-playerName" data-toggle="modal" data-target="#playerName-modal" class="iter btn btn-outline-primary">OYUNCU İSMİ<span></span></button></div>
+        <div class="col"><button id="btn-name-switch" class="iter btn btn-outline-primary"><span>İSİM YERLERİNİ DEĞİŞTİR</span></button></div>
+        <div class="col"><button id="btn-color-switch" class="iter btn btn-outline-primary"><span>TOPLARI DEĞİŞTİR</span></button></div>
+        <div class="w-100"></div>
+        <div class="col"><button id="btn-breaktime" class="iter btn btn-outline-primary" value=""><span>MOLAYI BAŞLAT</span></button></div>
+        <div class="col"><button id="btn-innings-limit" class="iter btn btn-outline-primary" value="">ISTAKA SINIRI: <span></span></button></div>
+        <div class="col"><button id="btn-drawn" class="iter btn btn-outline-primary" value="">BERABERLİK: <span></span></button></div>
+        <div class="col"><button id="btn-timeout-limit" class="iter btn btn-outline-primary" value="">TIMEOUT HAKKI: <span></span></button></div>
+        
+        <div class="w-100"></div>
+        <div class="col"><button id="btn-match-finis" data-toggle="modal" data-target="#match-save-modal" class="iter btn btn-outline-primary "><span>MAÇI BİTİR</span></button></div>
+        <div class="col"><button id="btn-run-limit" class="iter btn btn-outline-primary" value="">SAYI SINIRI: <span></span></button></div>
+        <div class="col"><button id="btn-last-innings" class="iter btn btn-outline-primary" value="">SON VURUŞ HAKKI: <span></span></button></div>
+        <div class="col"><button id="btn-thema" class="iter btn btn-outline-primary" value="">TEMAYI DEĞİŞTİR<span></span></button></div>
+        <div class="w-100"></div>
+        <div class="col"><button id="btn-start-match" data-toggle="modal" data-target="#myModal" class="iter btn btn-outline-primary">YENİ MAÇ<span></span></button></div>
+        <div class="col"><button id="btn-match-scores" onclick="location='{% url 'match:score' %}'" class="iter btn btn-outline-primary" value="">MAÇ SONUÇLARI<span></span></button></div>
+        <div class="col"><button id="btn-settings" class="iter btn btn-outline-primary" value=""><span>SİSTEM AYARLARI</span></button></div>
+        <div class="col"><button id="btn-timer" class="iter btn btn-outline-primary" value="">TIMER:  <span></span></button></div>        
+      </div>
     </div>
-
   
-
-    {% include 'match/run.html' %}
-    {% include 'match/player-name-modal.html' %}
   
-{% include 'controller.html' %}
-  {% endblock %}
-  {% block footer %}
-         
-  {% endblock %}  
+  {% include 'match/run.html' %}  
+  {% include 'match/keyboard.html' %}  
+  {% include 'match/match-save-modal.html' %}
+  
+  {% include 'match/player-name-modal.html' %}
+  
+    
+    
+    
+  
+  {% include 'controller.html' %}
+{% endblock %}
+{% block footer %}
+        
+{% endblock %}  
    
     

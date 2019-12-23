@@ -7,7 +7,7 @@
                     <div class="col-4 px-md-2 pt-2 text-center">                        
                         <div id="player1-card" class="card ">
                             <div class="card-header _text">
-                                <h1 >OYUNCU 1</h1>
+                                <h1 id="p1_name" ></h1>
                             </div>
                             <div id="player1-card-body" class="card-body ">
                                 <input id="player1_score" type="text" class="score _text" value="0">                                
@@ -32,7 +32,7 @@
                     <div class="col-4 px-md-2 pt-2 text-center " >
                         <div id="player2-card" class="card">
                             <div class="card-header _text_yellow">
-                                <h1 >OYUNCU 2 </h1>
+                                <h1 id="p2_name"></h1>
                             </div>
                             <div class="card-body">
                                 <input id="player2_score" type="text" class="score _text_yellow" value="0">                                
@@ -114,12 +114,14 @@
                 <div id="id_progress" class="row pt-3  justify-content-center ">
                     <div class="container-progress text-center">
                         <div id="mybar" class="bg-success text-end" style="height:90px;width:100%" ></div>
-                        <span id="span_time" class="_text">40</span>
+                        <span id="span_time" class="_text" ></span>
                     </div>
                 </div>
             </div>
+            
+            <div class="modal-footer">
             {% include 'controller-modal.html' %}
-            {% comment %} <div class="modal-footer"></div> {% endcomment %}
+            </div>
         </div>
     </div>   
 </div>

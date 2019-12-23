@@ -1,25 +1,22 @@
-{% load  crispy_forms_tags %}
+
 <div class="modal" id="playerName-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog " role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h3 class="_text">ISIM DEĞİŞTİR</h3>
+    <div class="modal-dialog modal-lg" role="dialog">
+        <div id="select-modal" class="modal-content text-center">
+            <div class="modal-header _text">
+                <h1>İSİM DEĞİŞTİR</h1>
             </div>    
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">                   
-                        <input type="text" class="form-control" id="player1-name-modal" value="OYUNCU 1">                                      
-                    </div>
-                    <div class="form-group">                   
-                        <input type="text" class="form-control" id="player2-name-modal" value="OYUNCU 2">                   
-                    </div>
-                </form>    
-            </div>
-            <div class="modal-footer">
-                
-                <button id="btn-playerName-submit" type="button" class="btn btn-dark" data-dismiss="modal">KAPAT</button>
-                
+            <div class="modal-body">                
+                <h2 class="_text">İsmini değiştirmek istediğiniz oyuncuyu seçiniz. </h2>                
+            </div>                               
+            <div id="modal-footer" class="modal-footer">
+                <button id="btn-player1_Name" data-toggle="modal" data-target="#keyboard-modal" data-dismiss="modal" type="button" class="btn btn-light">OYUNCU 1</button> 
+                <button id="btn-player2_Name" data-toggle="modal" data-target="#keyboard-modal" data-dismiss="modal" type="button" class="btn btn-warning">OYUNCU 2</button>
+                <button id="btn-kapat-modal" type="button" class="btn btn-danger" data-dismiss="modal">KAPAT</button>               
             </div>
         </div>
     </div>
 </div>
+
+
+
+

@@ -1,0 +1,22 @@
+
+<div class="modal" id="match-save-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="dialog">
+        <div id="finih-modal" class="modal-content text-center">
+            <div class="modal-header _text">
+                <h1>MAÇI BİTİR</h1>
+            </div>    
+            <div class="modal-body">                
+                <h2 class="_text">Maçı bitirme sebebinizi seçiniz.</h2>
+            </div>                               
+            <div id="finih-modal-footer" class="modal-footer">
+              <button id="btn-kapat-modal" type="button" class="btn btn-dark" data-dismiss="modal">KAPAT</button>  
+              <button id="btn-iptal-modal" type="button" class="btn btn-danger" data-dismiss="modal" >MAÇ İPTAL</button>  
+              <button id="btn-hukmen-modal" type="button" data-toggle="modal" data-target="#player-select-modal" data-dismiss="modal" class="btn btn-success" >HÜKMEN GALİP</button>  
+                
+                
+            </div>
+        </div>
+    </div>    
+</div>
+{% include 'match/player-select-modal.html' %}
+

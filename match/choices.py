@@ -1,6 +1,6 @@
 STATUS = [
-    (0, 'Hükmen Beyaz'),
-    (1, 'Hükmen Sarı'),
+    (0, 'Hükmen 1. Oyuncu'),
+    (1, 'Hükmen 2. Oyuncu'),
     (2, 'Berabere'),
     (3, 'İptal Edildi'),
     (4, 'Ertelendi'),   
